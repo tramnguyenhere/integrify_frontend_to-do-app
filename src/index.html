@@ -4,72 +4,29 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/style.css">
     <title>Todo App</title>
 </head>
 <body>
-    <header>
-        Todo App
-    </header>
-    <main class="container">
-        <section id="task-list">
-            <button>ADD NEW ITEM +</button>
-            <ul>
-                <li>
-                <p>Doing assignment 3</p>
-                <div>
-                    <p>Deadline:</p>
-                    <p>Thursday 10 May</p>
-                </div>
-                </li>
-                <li>
-                <p>Doing assignment 3</p>
-                <div>
-                    <p>Deadline:</p>
-                    <p>Thursday 10 May</p>
-                </div>
-                </li>
-                <li>
-                <p>Doing assignment 3</p>
-                <div>
-                    <p>Deadline:</p>
-                    <p>Thursday 10 May</p>
-                </div>
-                </li>
-            </ul>
-            <div>
-                <p>You have 1 task</p>
-                <button>CLEAR TASK</button>
-            </div>
-        </section>
-        <section id="add-task">
-            <h2>ADD NEW TASK</h2>
-            <form>
-               <input type="text" placeholder="Input title here...">
-               <input type="date" name="deadline" id="">
-               <select name="status" id="">
-                    <option value="in-progress">In progress</option>
-                    <option value="not-started">Not started</option>
-                    <option value="done">Done</option>
-               </select>
-               <button type="submit">Confirm</button>
-               <button>Cancel</button>
-            </form>
-        </section>
-        <section id="edit-task">
-            <h2>EDIT TASK</h2>
-            <form>
-               <input type="text" placeholder="Input title here..." value="Doing assignment 3">
-               <input type="date" name="deadline" id="">
-               <select name="status" id="">
-                    <option value="in-progress">In progress</option>
-                    <option value="not-started">Not started</option>
-                    <option value="done">Done</option>
-               </select>
-               <button>Delete Task</button>
-               <button>Cancel</button>
-               <button type="submit">Confirm</button>
-            </form>
-        </section>
-    </main>
+    <h1>Todo App</h1>
+    <button id="button--add-task">Add Task</button>
+    <ul id="task-list"></ul>
+    <div class="task__summary">
+        <p id="task__quantity"></p>
+        <button id="button--clear-task">Clear All Tasks</button>
+    </div>
+    
+    <form id="form--add-task" style="display:none;">
+        <input type="text" id="task__name" placeholder="Input title here...">
+        <input type="date" id="task__deadline">
+        <select id="task__status">
+            <option value="not-started">Not Started</option>
+            <option value="done">Done</option>
+            <option value="in-progress">In Progress</option>
+        </select>
+        <button id="button--cancel">CANCEL</button>
+        <button id="button--save-task">CONFIRM</button>
+    </form>
+    <script src="./todo.js"></script>
 </body>
 </html>
