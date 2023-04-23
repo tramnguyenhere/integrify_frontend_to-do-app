@@ -1,12 +1,16 @@
-.task--not-started {       
-    color: red;
+@use "./variables/colors" as colors;
+@use "./components/main";
+
+body {
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(colors.$color--green, colors.$color--brown);
+    font-family: sans-serif;
 }
-    
-.task--done {       
-    color: green;
-}
-    
-.task--in-progress {       
-    color: yellow;
-}
-    
+
+   

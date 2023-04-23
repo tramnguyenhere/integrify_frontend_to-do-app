@@ -9,17 +9,19 @@
 </head>
 <body>
     <h1>Todo App</h1>
-    <button id="button--add-task">ADD NEW ITEM +</button>
-    <ul id="task-list"></ul>
-    <div class="task__summary">
-        <p id="task__quantity"></p>
-        <button id="button--clear-task">CLEAR TASKS</button>
+    <div class="main-display">
+        <button id="button--add-task">ADD NEW ITEM +</button>
+        <ul id="task-list"></ul>
+        <div class="task__summary">
+            <p id="task__quantity"></p>
+            <button id="button--clear-task">CLEAR TASKS</button>
+        </div>
     </div>
     
     <form id="form--add-task" style="display:none;">
-        <input required type="text" id="task__name" placeholder="Input title here...">
-        <input required type="date" id="task__deadline">
-        <select required id="task__status">
+        <input type="text" id="task__title" name="taskTitle" placeholder="Input title here...">
+        <input type="date" id="task__deadline" name="taskDealine">
+        <select id="task__status">
             <option value="not-started">Not Started</option>
             <option value="done">Done</option>
             <option value="in-progress">In Progress</option>

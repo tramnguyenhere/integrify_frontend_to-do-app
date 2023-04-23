@@ -1,0 +1,55 @@
+@use "../variables/colors" as colors;
+@use "../mixins/button" as button;
+
+.main-display {
+    box-shadow: 10px 10px 10px black;
+    border-radius: 2em;
+    height: fit-content;
+    width: 40vw;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    background-color: colors.$color--beige;
+
+    #button--add-task {
+       @include button.button(100%)
+    }
+
+    #task-list {
+        width: 100%;
+        list-style: none;
+        display: flex;
+        justify-content: flex-start;
+        padding: 0;
+
+        li {
+            width: 100%;
+            box-shadow: 0px 0px 5px 1px rgba(83,83,83,0.72) inset;
+            -webkit-box-shadow: 0px 0px 5px 1px rgba(83,83,83,0.72) inset;
+            -moz-box-shadow: 0px 0px 5px 1px rgba(83,83,83,0.72) inset;
+            padding: 0 25px;
+            position: relative;
+
+
+            
+            .task--not-started {       
+                border-left: 2px solid red;
+            }
+                
+            .task--done {  
+                position: absolute;     
+                border-left: 2px solid green;
+                height: 80%;
+                top: 10%;
+                left: 10px;
+            }
+                
+            .task--in-progress {       
+                border-left: 2px solid yellow;
+            }
+             
+        }
+    }
+}

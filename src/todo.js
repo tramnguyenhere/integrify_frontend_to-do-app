@@ -6,7 +6,7 @@ const addTaskForm = document.getElementById('form--add-task');
 
 const taskList = document.getElementById('task-list');
 
-const taskNameInput = document.getElementById('task__name');
+const taskTitleInput = document.getElementById('task__title');
 const taskDeadlineInput = document.getElementById('task__deadline');
 const taskStatusInput = document.getElementById('task__status');
 
@@ -14,7 +14,7 @@ let tasks = [
   {
     id: 1,
     title: 'hihi',
-    deadline: 'Thursday 10 May',
+    deadline: '2023-05-04',
     status: 'done',
   },
 ];
@@ -28,29 +28,32 @@ clearTasksButton.addEventListener('click', () => {
   renderTasks();
 });
 
-saveTaskButton.addEventListener('click', () => {
-  const taskName = taskNameInput.value.trim();
+saveTaskButton.addEventListener('click', (event) => {
+  event.preventDefault();
+  const taskTitle = taskTitleInput.value.trim();
   const taskDeadline = taskDeadlineInput.value;
   const taskStatus = taskStatusInput.value;
-  const taskId = tasks[-1].id + 1;
 
-  if (taskName && !tasks.forEach((task) => task.title.includes(taskName))) {
+  const lastTask = tasks[tasks.length - 1];
+  const taskId = lastTask ? lastTask.id + 1 : 1;
+
+  if (taskTitle && !tasks.some((task) => task.title === taskTitle)) {
     tasks.push({
       id: taskId,
-      title: taskName,
+      title: taskTitle,
       deadline: taskDeadline,
-      status: taskStatus.value,
+      status: taskStatus,
     });
 
-    taskNameInput.value = '';
+    taskTitleInput.value = '';
     taskDeadlineInput.value = '';
     taskStatusInput.value = 'not-started';
     addTaskForm.style.display = 'none';
 
     renderTasks();
   } else {
-    taskNameInput.value = '';
-    alert('Please retype the title!');
+    taskTitleInput.value = '';
+    alert('Please enter a unique title!');
   }
 });
 
@@ -71,9 +74,9 @@ taskList.addEventListener('click', (event) => {
     const deleteTaskButton = taskActions.querySelector('.button--delete-task');
 
     editTaskButton.addEventListener('click', () => {
-      const newTaskName = prompt('Enter new title:', task.title);
-      if (newTaskName && newTaskName.trim() !== '') {
-        task.title = newTaskName.trim();
+      const newtaskTitle = prompt('Enter new title:', task.title);
+      if (newtaskTitle && newtaskTitle.trim() !== '') {
+        task.title = newtaskTitle.trim();
         renderTasks();
       }
     });
@@ -92,6 +95,7 @@ function renderTasks() {
     const taskElement = document.createElement('li');
     const taskTitleElement = document.createElement('p');
     const taskDeadlineElement = document.createElement('p');
+    const taskStatusElement = document.createElement('div');
 
     taskTitleElement.classList.add('task__title');
     taskDeadlineElement.classList.add('task__deadline');
@@ -101,15 +105,16 @@ function renderTasks() {
     taskElement.id = task.id;
 
     if (task.status === 'not-started') {
-      taskElement.classList.add('task--not-started');
+      taskStatusElement.classList.add('task--not-started');
     } else if (task.status === 'done') {
-      taskElement.classList.add('task--done');
+      taskStatusElement.classList.add('task--done');
     } else {
-      taskElement.classList.add('task--in-progress');
+      taskStatusElement.classList.add('task--in-progress');
     }
 
     taskElement.appendChild(taskTitleElement);
     taskElement.appendChild(taskDeadlineElement);
+    taskElement.appendChild(taskStatusElement);
     taskList.appendChild(taskElement);
   });
 
@@ -122,5 +127,3 @@ function renderTasks() {
 
 // Initial render
 renderTasks();
-
-console.log(tasks);
