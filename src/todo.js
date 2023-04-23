@@ -1,46 +1,64 @@
-// Get elements
-const addTaskBtn = document.getElementById('button--add-task');
-const clearTasksBtn = document.getElementById('button--clear-task');
-const taskList = document.getElementById('task-list');
-const addTaskForm = document.getElementById('form--add-task');
-const taskNameInput = document.getElementById('task__name');
-const saveTaskBtn = document.getElementById('button--save-task');
+const addTaskButton = document.getElementById('button--add-task');
+const clearTasksButton = document.getElementById('button--clear-task');
+const saveTaskButton = document.getElementById('button--save-task');
 
-// Define tasks array
+const addTaskForm = document.getElementById('form--add-task');
+
+const taskList = document.getElementById('task-list');
+
+const taskNameInput = document.getElementById('task__name');
+const taskDeadlineInput = document.getElementById('task__deadline');
+const taskStatusInput = document.getElementById('task__status');
+
 let tasks = [
   {
+    id: 1,
     title: 'hihi',
-    completed: false,
+    deadline: 'Thursday 10 May',
+    status: 'done',
   },
 ];
 
-// Add event listeners
-addTaskBtn.addEventListener('click', () => {
+addTaskButton.addEventListener('click', () => {
   addTaskForm.style.display = 'block';
 });
 
-clearTasksBtn.addEventListener('click', () => {
+clearTasksButton.addEventListener('click', () => {
   tasks = [];
   renderTasks();
 });
 
-saveTaskBtn.addEventListener('click', () => {
+saveTaskButton.addEventListener('click', () => {
   const taskName = taskNameInput.value.trim();
-  if (taskName) {
+  const taskDeadline = taskDeadlineInput.value;
+  const taskStatus = taskStatusInput.value;
+  const taskId = tasks[-1].id + 1;
+
+  if (taskName && !tasks.forEach((task) => task.title.includes(taskName))) {
     tasks.push({
+      id: taskId,
       title: taskName,
-      completed: false,
+      deadline: taskDeadline,
+      status: taskStatus.value,
     });
+
     taskNameInput.value = '';
+    taskDeadlineInput.value = '';
+    taskStatusInput.value = 'not-started';
     addTaskForm.style.display = 'none';
+
     renderTasks();
+  } else {
+    taskNameInput.value = '';
+    alert('Please retype the title!');
   }
 });
 
 taskList.addEventListener('click', (event) => {
   if (event.target.tagName.toLowerCase() === 'li') {
-    const taskIndex = event.target.getAttribute('data-index');
-    const task = tasks[taskIndex];
+    const taskIndex = event.target.id;
+
+    const task = tasks.filter((task) => task.id == taskIndex)[0];
 
     const taskActions = document.createElement('div');
     taskActions.innerHTML = `
@@ -49,10 +67,10 @@ taskList.addEventListener('click', (event) => {
         `;
     event.target.appendChild(taskActions);
 
-    const editTaskBtn = taskActions.querySelector('."button--edit-task');
-    const deleteTaskBtn = taskActions.querySelector('.button--delete-task');
+    const editTaskButton = taskActions.querySelector('.button--edit-task');
+    const deleteTaskButton = taskActions.querySelector('.button--delete-task');
 
-    editTaskBtn.addEventListener('click', () => {
+    editTaskButton.addEventListener('click', () => {
       const newTaskName = prompt('Enter new title:', task.title);
       if (newTaskName && newTaskName.trim() !== '') {
         task.title = newTaskName.trim();
@@ -60,8 +78,8 @@ taskList.addEventListener('click', (event) => {
       }
     });
 
-    deleteTaskBtn.addEventListener('click', () => {
-      tasks.splice(taskIndex, 1);
+    deleteTaskButton.addEventListener('click', () => {
+      tasks = tasks.filter((task) => task.id != taskIndex);
       renderTasks();
     });
   }
@@ -70,22 +88,39 @@ taskList.addEventListener('click', (event) => {
 // Render tasks function
 function renderTasks() {
   taskList.innerHTML = '';
-  tasks.forEach((task, index) => {
+  tasks.forEach((task) => {
     const taskElement = document.createElement('li');
-    taskElement.textContent = task.title;
-    taskElement.setAttribute('data-index', index);
-    if (task.completed) {
-      taskElement.classList.add('completed');
+    const taskTitleElement = document.createElement('p');
+    const taskDeadlineElement = document.createElement('p');
+
+    taskTitleElement.classList.add('task__title');
+    taskDeadlineElement.classList.add('task__deadline');
+
+    taskTitleElement.textContent = task.title;
+    taskDeadlineElement.textContent = task.deadline;
+    taskElement.id = task.id;
+
+    if (task.status === 'not-started') {
+      taskElement.classList.add('task--not-started');
+    } else if (task.status === 'done') {
+      taskElement.classList.add('task--done');
+    } else {
+      taskElement.classList.add('task--in-progress');
     }
+
+    taskElement.appendChild(taskTitleElement);
+    taskElement.appendChild(taskDeadlineElement);
     taskList.appendChild(taskElement);
   });
 
   if (tasks.length === 0) {
-    clearTasksBtn.style.display = 'none';
+    clearTasksButton.style.display = 'none';
   } else {
-    clearTasksBtn.style.display = 'block';
+    clearTasksButton.style.display = 'block';
   }
 }
 
 // Initial render
 renderTasks();
+
+console.log(tasks);

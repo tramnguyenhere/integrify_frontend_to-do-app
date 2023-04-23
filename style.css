@@ -1,12 +1,12 @@
-.todo--not-started {
+.task--not-started {
   color: red;
 }
 
-.todo--done {
+.task--done {
   color: green;
 }
 
-.todo--in-progress {
+.task--in-progress {
   color: yellow;
 }
 
