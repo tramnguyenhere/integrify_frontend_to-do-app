@@ -1,15 +1,65 @@
 # To-do list
 
-Create a simple application to let users add/remove/edit tasks.
-Tasks should have: title, deadline, status
-![task-list](task_list.png)
-![add-task](add_task.png)
-![edit-task](edit_task.png)
+This project uses vanilla JavaScript to create a simple application to let users add/remove/edit tasks.
 
-## Requirements
+## Link to the demo
 
-- `Title` should be unique
-- `Status` is one of 3 options : `["not started", "in progress", "done"]`
-- Form to add/edit tasks should be opened/closed by clicking on a button (see the screenshot)
-- Deploy your project to github page and provide link to your live server in README. Make sure your README file is informative and codes are well-formatted
-- Only minimum style (with SASS) is needed.
+[https://todo-app-tramnguyenhere.netlify.app/](https://todo-app-tramnguyenhere.netlify.app/)
+
+## Table of content
+
+- [Technologies](#technologies)
+- [Project structure](#project-structure)
+- [Getting started](#getting-started)
+
+<a name="technologies"></a>
+
+## Technologies
+
+- HTML5
+- SASS
+- JavaScript
+
+<a name="project-structure"></a>
+
+## Project structure
+
+```
+│   .gitignore
+│   package-lock.json
+│   package.json
+│   README.md
+│   style.css
+│   style.css.map
+└───src
+    │   index.html
+    │   todo.js
+    │
+    └───styles
+        │   style.scss
+        │
+        ├───components
+        │       _form.scss
+        │       _header.scss
+        │       _main.scss
+        │
+        ├───mixins
+        │       _button.scss
+        │       _status.scss
+        │
+        ├───shared
+        │       _button.scss
+        │
+        └───variables
+                _colors.scss
+```
+
+<a name="getting-started"></a>
+
+## Getting started
+
+Clone the repository from github:
+
+```
+git clone https://github.com/tramnguyenhere/integrify_frontend_to-do-app.git
+```
