@@ -132,6 +132,7 @@ taskList.addEventListener('click', (event) => {
         selectedTask.deadline = newDeadline;
         selectedTask.status = newStatus;
         renderMainDisplay();
+        selectedTask = {};
       } else {
         taskTitleEditInput.value = '';
         alert('Please enter a unique title!');
