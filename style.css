@@ -59,21 +59,21 @@
 }
 .main-display #task-list__container #task-list li .task--not-started {
   position: absolute;
-  border-left: 0.2rem solid #bc6c25;
+  border-left: 0.2rem solid #ed6a5a;
   height: 80%;
   top: 10%;
   left: 2%;
 }
 .main-display #task-list__container #task-list li .task--done {
   position: absolute;
-  border-left: 0.2rem solid #606c38;
+  border-left: 0.2rem solid #9bc1bc;
   height: 80%;
   top: 10%;
   left: 2%;
 }
 .main-display #task-list__container #task-list li .task--in-progress {
   position: absolute;
-  border-left: 0.2rem solid #dda15e;
+  border-left: 0.2rem solid #f4f1bb;
   height: 80%;
   top: 10%;
   left: 2%;
@@ -124,6 +124,18 @@
 }
 .form .form__control button {
   margin: 0 0.5rem;
+}
+
+#form--add-task, #form--edit-task {
+  display: none;
+}
+
+header {
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  font-size: 2rem;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+  letter-spacing: 0.1rem;
 }
 
 .button--fit {

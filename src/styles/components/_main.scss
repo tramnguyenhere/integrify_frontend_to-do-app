@@ -58,15 +58,15 @@
                 }
                 
                 .task--not-started {       
-                    @include status.status(colors.$color--dark-brown)
+                    @include status.status(colors.$color--not-started)
                 }
                     
                 .task--done {  
-                    @include status.status(colors.$color--green)
+                    @include status.status(colors.$color--done)
                 }
                     
                 .task--in-progress {       
-                    @include status.status(colors.$color--brown)
+                    @include status.status(colors.$color--in-progress)
                 }
                  
             }

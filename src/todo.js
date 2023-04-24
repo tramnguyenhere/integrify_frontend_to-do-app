@@ -2,28 +2,53 @@ const addTaskButton = document.getElementById('button--add-task');
 const clearTasksButton = document.getElementById('button--clear-task');
 const cancelAddTaskButton = document.getElementById('button--cancel');
 const confirmAddTaskButton = document.getElementById('button--confirm-task');
+const deleteTaskButton = document.getElementById('button--delete-task');
+const editTaskButton = document.getElementById('button--edit-task');
 
 const addTaskForm = document.getElementById('form--add-task');
-const taskListDisplay = document.getElementById('task-list__container');
+const editTaskForm = document.getElementById('form--edit-task');
 
+const taskListDisplay = document.getElementById('task-list__container');
 const taskList = document.getElementById('task-list');
 const taskQuantity = document.getElementById('task__quantity');
+
 const taskTitleInput = document.getElementById('task__title');
+const taskTitleEditInput = document.getElementById('task__title--edit');
+
 const taskDeadlineInput = document.getElementById('task__deadline');
+const taskDeadlineEditInput = document.getElementById('task__deadline--edit');
+
 const taskStatusInput = document.getElementById('task__status');
+const taskStatusEditInput = document.getElementById('task__status--edit');
+const taskStatusEditSelect = document.getElementById('task__status--edit');
+const taskStatusNotStartedOption = document.getElementById(
+  'task__status__option--not-started'
+);
+const taskStatusDoneOption = document.getElementById(
+  'task__status__option--done'
+);
+const taskStatusInProgressOption = document.getElementById(
+  'task__status__option--in-progress'
+);
 
 let tasks = [
   {
     id: 1,
-    title: 'hihi',
-    deadline: '2023-05-04',
+    title: 'Doing assignment 2',
+    deadline: '2023-04-24',
     status: 'done',
   },
   {
     id: 2,
-    title: 'hehe',
-    deadline: '2023-05-04',
+    title: 'Doing assignment 3',
+    deadline: '2023-04-26',
     status: 'in-progress',
+  },
+  {
+    id: 3,
+    title: 'Doing assignment 4',
+    deadline: '2023-05-01',
+    status: 'not-started',
   },
 ];
 
@@ -58,13 +83,8 @@ confirmAddTaskButton.addEventListener('click', (event) => {
     taskTitleInput.value = '';
     taskDeadlineInput.value = '';
     taskStatusInput.value = 'not-started';
-    addTaskForm.style.display = 'none';
 
-    renderTasks();
-    renderTaskSummary();
-
-    addTaskForm.style.display = 'none';
-    taskListDisplay.style.display = 'block';
+    renderMainDisplay();
   } else {
     taskTitleInput.value = '';
     alert('Please enter a unique title!');
@@ -75,42 +95,50 @@ taskList.addEventListener('click', (event) => {
   let selectedTask;
   if (event.target.tagName.toLowerCase() === 'li') {
     const taskIndex = event.target.id;
+    selectedTask = tasks.find((task) => task.id == taskIndex);
 
-    selectedTask = tasks.filter((task) => task.id == taskIndex)[0];
-    console.log(selectedTask);
+    taskTitleEditInput.value = selectedTask.title;
+    taskDeadlineEditInput.value = selectedTask.deadline;
 
-    // const taskActions = document.createElement('div');
-    // taskActions.innerHTML = `
-    //         <button class="button--edit-task">Edit</button>
-    //         <button class="button--delete-task">Delete</button>
-    //     `;
-    // event.target.appendChild(taskActions);
+    editTaskForm.style.display = 'flex';
+    taskListDisplay.style.display = 'none';
 
-    // const editTaskButton = taskActions.querySelector('.button--edit-task');
-    // const deleteTaskButton = taskActions.querySelector('.button--delete-task');
+    switch (selectedTask.status) {
+      case 'not-started':
+        taskStatusNotStartedOption.setAttribute('selected', 'selected');
+        break;
+      case 'done':
+        taskStatusDoneOption.setAttribute('selected', 'selected');
+      case 'in-progress':
+        taskStatusInProgressOption.setAttribute('selected', 'selected');
+    }
 
-    // deleteTaskHandler(deleteTaskButton, task, taskIndex);
-    // editTaskHandler(editTaskButton, task);
+    deleteTaskButton.addEventListener('click', () => {
+      event.preventDefault();
+      tasks = tasks.filter((task) => task.id != taskIndex);
+
+      renderMainDisplay();
+    });
+
+    editTaskForm.addEventListener('submit', (event) => {
+      event.preventDefault();
+
+      const newTitle = taskTitleEditInput.value.trim();
+      const newDeadline = taskDeadlineEditInput.value;
+      const newStatus = taskStatusEditSelect.value;
+
+      if (newTitle !== '' || !tasks.some((task) => task.title === newTitle)) {
+        selectedTask.title = newTitle;
+        selectedTask.deadline = newDeadline;
+        selectedTask.status = newStatus;
+        renderMainDisplay();
+      } else {
+        taskTitleEditInput.value = '';
+        alert('Please enter a unique title!');
+      }
+    });
   }
 });
-
-const editTaskHandler = (button, item) => {
-  button.addEventListener('click', () => {
-    const newtaskTitle = prompt('Enter new title:', item.title);
-    if (newtaskTitle && newtaskTitle.trim() !== '') {
-      item.title = newtaskTitle.trim();
-      renderTasks();
-    }
-  });
-};
-
-const deleteTaskHandler = (button, item, index) => {
-  button.addEventListener('click', () => {
-    tasks = tasks.filter((task) => item.id != index);
-    renderTasks();
-    renderTaskSummary();
-  });
-};
 
 const renderTasks = () => {
   taskList.innerHTML = '';
@@ -132,7 +160,9 @@ const renderTasks = () => {
     }
 
     taskTitleElement.textContent = task.title;
-    taskDeadlineElement.textContent = `Deadline: ${task.deadline}`;
+    taskDeadlineElement.textContent = `Deadline: ${dayFormat(task.deadline)} ${
+      task.deadline
+    }`;
     taskElement.id = task.id;
 
     taskElement.appendChild(taskStatusElement);
@@ -152,6 +182,37 @@ const renderTaskSummary = () => {
     clearTasksButton.style.display = 'none';
   } else {
     clearTasksButton.style.display = 'block';
+  }
+};
+
+const renderMainDisplay = () => {
+  renderTasks();
+  renderTaskSummary();
+  taskListDisplay.style.display = 'block';
+  editTaskForm.style.display = 'none';
+  addTaskForm.style.display = 'none';
+};
+
+const dayFormat = (date) => {
+  const dayOfWeek = new Date(date).getDay();
+
+  switch (dayOfWeek) {
+    case 1:
+      return 'Monday';
+    case 2:
+      return 'Tuesday';
+    case 3:
+      return 'Wednesday';
+    case 4:
+      return 'Thursday';
+    case 5:
+      return 'Friday';
+    case 6:
+      return 'Saturday';
+    case 7:
+      return 'Sunday';
+    default:
+      break;
   }
 };
 

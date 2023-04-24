@@ -1,6 +1,7 @@
 @use "./variables/colors" as colors;
 @use "./components/main";
 @use "./components/form";
+@use "./components/header";
 @use "./shared/button";
 
 body {
