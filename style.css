@@ -10,7 +10,11 @@
   align-items: center;
   background-color: #fefae0;
 }
-.main-display #button--add-task {
+.main-display #task-list__container {
+  width: 100%;
+  display: block;
+}
+.main-display #task-list__container #button--add-task {
   background-color: transparent;
   padding: 1em 2em;
   font-family: sans-serif;
@@ -20,37 +24,121 @@
   transition: all 0.2s ease-in-out;
   cursor: pointer;
 }
-.main-display #button--add-task:hover {
+.main-display #task-list__container #button--add-task:hover {
   background-color: #283618;
   color: #fefae0;
 }
-.main-display #task-list {
+.main-display #task-list__container #task-list {
   width: 100%;
   list-style: none;
   display: flex;
   justify-content: flex-start;
   padding: 0;
+  flex-direction: column;
 }
-.main-display #task-list li {
+.main-display #task-list__container #task-list li {
   width: 100%;
   box-shadow: 0px 0px 5px 1px rgba(83, 83, 83, 0.72) inset;
   -webkit-box-shadow: 0px 0px 5px 1px rgba(83, 83, 83, 0.72) inset;
   -moz-box-shadow: 0px 0px 5px 1px rgba(83, 83, 83, 0.72) inset;
-  padding: 0 25px;
   position: relative;
+  margin-bottom: 0.5rem;
+  cursor: pointer;
 }
-.main-display #task-list li .task--not-started {
-  border-left: 2px solid red;
+.main-display #task-list__container #task-list li a {
+  cursor: pointer;
 }
-.main-display #task-list li .task--done {
+.main-display #task-list__container #task-list li .task__title, .main-display #task-list__container #task-list li .task__deadline {
+  margin-left: 5%;
+}
+.main-display #task-list__container #task-list li .task__title {
+  font-weight: 700;
+}
+.main-display #task-list__container #task-list li .task__deadline {
+  font-style: italic;
+}
+.main-display #task-list__container #task-list li .task--not-started {
   position: absolute;
-  border-left: 2px solid green;
+  border-left: 0.2rem solid #bc6c25;
   height: 80%;
   top: 10%;
-  left: 10px;
+  left: 2%;
 }
-.main-display #task-list li .task--in-progress {
-  border-left: 2px solid yellow;
+.main-display #task-list__container #task-list li .task--done {
+  position: absolute;
+  border-left: 0.2rem solid #606c38;
+  height: 80%;
+  top: 10%;
+  left: 2%;
+}
+.main-display #task-list__container #task-list li .task--in-progress {
+  position: absolute;
+  border-left: 0.2rem solid #dda15e;
+  height: 80%;
+  top: 10%;
+  left: 2%;
+}
+.main-display #task-list__container .task__summary {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.main-display #task-list__container .task__summary #task__quantity {
+  font-size: 1.2rem;
+  font-weight: 400;
+}
+
+.form {
+  width: 100%;
+  color: #283618;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: max-content;
+}
+.form .form__label {
+  font-size: 1.7rem;
+  font-weight: 600;
+  text-align: center;
+}
+.form .form__input {
+  width: calc(100% - 2rem);
+  height: 3rem;
+  margin: 0.3rem 0;
+  padding: 0;
+  border: 0.1rem solid #283618;
+  padding: 0 1rem;
+  font-size: 1rem;
+}
+.form .form__input:focus {
+  border: 0.15rem solid #283618;
+  outline: none;
+}
+.form .form__input option {
+  font-size: 1.5rem;
+}
+.form .form__control {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: center;
+}
+.form .form__control button {
+  margin: 0 0.5rem;
+}
+
+.button--fit {
+  background-color: transparent;
+  padding: 1em 2em;
+  font-family: sans-serif;
+  width: fit-content;
+  color: #283618;
+  font-weight: 700;
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+}
+.button--fit:hover {
+  background-color: #283618;
+  color: #fefae0;
 }
 
 body {

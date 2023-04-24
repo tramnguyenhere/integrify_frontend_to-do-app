@@ -1,0 +1,47 @@
+@use '../mixins/button' as button;
+@use '../variables/colors' as colors;
+
+.form {
+    width: 100%;
+    color: colors.$color--dark-green;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: max-content;
+
+    .form__label {
+        font-size: 1.7rem;
+        font-weight: 600;
+        text-align: center;
+    }
+
+    .form__input {
+        width: calc(100% - 2rem);
+        height: 3rem;
+        margin: .3rem 0;
+        padding: 0;
+        border: .1rem solid colors.$color--dark-green;
+        padding: 0 1rem;
+        font-size: 1rem;
+
+        &:focus {
+            border: .15rem solid colors.$color--dark-green; 
+            outline: none;
+        }
+
+        option {
+            font-size: 1.5rem;
+        }
+    }
+
+    .form__control {
+        margin-top: 1rem;
+        display: flex;
+        justify-content: center;
+
+        button {
+            margin: 0 .5rem;
+        }
+    }
+
+}

@@ -1,0 +1,5 @@
+@use "../mixins/button" as button;
+
+.button--fit {
+    @include button.button(fit-content)
+}

@@ -9,26 +9,33 @@
 </head>
 <body>
     <h1>Todo App</h1>
-    <div class="main-display">
-        <button id="button--add-task">ADD NEW ITEM +</button>
-        <ul id="task-list"></ul>
-        <div class="task__summary">
-            <p id="task__quantity"></p>
-            <button id="button--clear-task">CLEAR TASKS</button>
-        </div>
-    </div>
+    <main class="main-display">
+       <div id="task-list__container">
+            <button id="button--add-task">ADD NEW ITEM +</button>
+            <ul id="task-list"></ul>
+            <div class="task__summary">
+                <p id="task__quantity"></p>
+                <button class="button--fit" id="button--clear-task">CLEAR TASKS</button>
+            </div>
+       </div>
+       <form id="form--add-task" class="form" style="display:none;">
+           <label class="form__label">ADD NEW TASK</label>
+           <div class="input-list">
+               <input class="form__input" type="text" id="task__title" name="taskTitle" placeholder="Input title here...">
+               <input class="form__input" type="date" id="task__deadline" name="taskDealine">
+               <select class="form__input" id="task__status">
+                   <option value="not-started">Not Started</option>
+                   <option value="done">Done</option>
+                   <option value="in-progress">In Progress</option>
+               </select>
+           </div>
+           <div class="form__control">
+                <button class="button--fit" id="button--cancel">CANCEL</button>
+                <button class="button--fit" id="button--confirm-task">CONFIRM</button>
+           </div>
+       </form>
+    </main>
     
-    <form id="form--add-task" style="display:none;">
-        <input type="text" id="task__title" name="taskTitle" placeholder="Input title here...">
-        <input type="date" id="task__deadline" name="taskDealine">
-        <select id="task__status">
-            <option value="not-started">Not Started</option>
-            <option value="done">Done</option>
-            <option value="in-progress">In Progress</option>
-        </select>
-        <button id="button--cancel">CANCEL</button>
-        <button id="button--save-task">CONFIRM</button>
-    </form>
     <script src="./todo.js"></script>
 </body>
 </html>

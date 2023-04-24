@@ -1,5 +1,8 @@
 @use "../variables/colors" as colors;
 @use "../mixins/button" as button;
+@use "../mixins/status" as status;
+
+
 
 .main-display {
     box-shadow: 10px 10px 10px black;
@@ -13,43 +16,72 @@
     align-items: center;
     background-color: colors.$color--beige;
 
-    #button--add-task {
-       @include button.button(100%)
-    }
-
-    #task-list {
+    #task-list__container {
         width: 100%;
-        list-style: none;
-        display: flex;
-        justify-content: flex-start;
-        padding: 0;
+        display: block;
 
-        li {
+        #button--add-task {
+           @include button.button(100%)
+        }
+    
+        #task-list {
             width: 100%;
-            box-shadow: 0px 0px 5px 1px rgba(83,83,83,0.72) inset;
-            -webkit-box-shadow: 0px 0px 5px 1px rgba(83,83,83,0.72) inset;
-            -moz-box-shadow: 0px 0px 5px 1px rgba(83,83,83,0.72) inset;
-            padding: 0 25px;
-            position: relative;
-
-
-            
-            .task--not-started {       
-                border-left: 2px solid red;
-            }
+            list-style: none;
+            display: flex;
+            justify-content: flex-start;
+            padding: 0;
+            flex-direction: column;
+    
+            li {
+                width: 100%;
+                box-shadow: 0px 0px 5px 1px rgba(83,83,83,0.72) inset;
+                -webkit-box-shadow: 0px 0px 5px 1px rgba(83,83,83,0.72) inset;
+                -moz-box-shadow: 0px 0px 5px 1px rgba(83,83,83,0.72) inset;
+                position: relative;
+                margin-bottom: .5rem;
+                cursor: pointer;
+    
+                a {
+                    cursor: pointer;
+                }
+    
+                .task__title, .task__deadline {
+                    margin-left: 5%;
+                }
+    
+                .task__title {
+                    font-weight: 700;
+                }
+    
+                .task__deadline {
+                    font-style: italic;
+                }
                 
-            .task--done {  
-                position: absolute;     
-                border-left: 2px solid green;
-                height: 80%;
-                top: 10%;
-                left: 10px;
+                .task--not-started {       
+                    @include status.status(colors.$color--dark-brown)
+                }
+                    
+                .task--done {  
+                    @include status.status(colors.$color--green)
+                }
+                    
+                .task--in-progress {       
+                    @include status.status(colors.$color--brown)
+                }
+                 
             }
-                
-            .task--in-progress {       
-                border-left: 2px solid yellow;
+        }
+    
+        .task__summary {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+    
+            #task__quantity {
+                font-size: 1.2rem;
+                font-weight: 400
             }
-             
         }
     }
+
 }

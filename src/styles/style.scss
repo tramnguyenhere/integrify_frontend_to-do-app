@@ -1,5 +1,7 @@
 @use "./variables/colors" as colors;
 @use "./components/main";
+@use "./components/form";
+@use "./shared/button";
 
 body {
     width: 100vw;
@@ -13,4 +15,3 @@ body {
     font-family: sans-serif;
 }
 
-   

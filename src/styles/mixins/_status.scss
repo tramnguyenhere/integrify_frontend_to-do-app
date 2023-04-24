@@ -1,0 +1,7 @@
+@mixin status($color) {
+    position: absolute;     
+    border-left: .2rem solid $color;
+    height: 80%;
+    top: 10%;
+    left: 2%;
+}
