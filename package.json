@@ -4,8 +4,8 @@
   "description": "Create a simple application to let users add/remove/edit tasks.\r Tasks should have: title, deadline, status\r ![task-list](task_list.png)\r ![add-task](add_task.png)\r ![edit-task](edit_task.png)",
   "main": "index.js",
   "scripts": {
-    "compile": "npm sass src/styles/style.scss:style.css",
-    "compile:watch": "sass --watch src/styles/style.scss:style.css"
+    "compile": "npm sass src/styles/style.scss:src/style.css",
+    "compile:watch": "sass --watch src/styles/style.scss:src/style.css"
   },
   "author": "Tram Nguyen",
   "license": "ISC",
