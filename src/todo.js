@@ -1,6 +1,6 @@
 const addTaskButton = document.getElementById('button--add-task');
 const clearTasksButton = document.getElementById('button--clear-task');
-const cancelAddTaskButton = document.getElementById('button--cancel');
+const cancelButton = document.getElementById('button--cancel');
 const confirmAddTaskButton = document.getElementById('button--confirm-task');
 const deleteTaskButton = document.getElementById('button--delete-task');
 const editTaskButton = document.getElementById('button--edit-task');
@@ -63,6 +63,10 @@ clearTasksButton.addEventListener('click', () => {
   renderTaskSummary();
 });
 
+cancelButton.addEventListener('click', () => {
+  renderMainDisplay();
+});
+
 confirmAddTaskButton.addEventListener('click', (event) => {
   event.preventDefault();
   const taskTitle = taskTitleInput.value.trim();
@@ -93,10 +97,19 @@ confirmAddTaskButton.addEventListener('click', (event) => {
 
 taskList.addEventListener('click', (event) => {
   let selectedTask;
+  console.log(event.target.id);
   if (event.target.tagName.toLowerCase() === 'li') {
     const taskIndex = event.target.id;
     selectedTask = tasks.find((task) => task.id == taskIndex);
+  } else if (
+    event.target.id.startsWith('title-task--') ||
+    event.target.id.startsWith('deadline-task--')
+  ) {
+    const taskIndex = event.target.id.split('--')[1];
+    selectedTask = tasks.find((task) => task.id == taskIndex);
+  }
 
+  if (selectedTask) {
     taskTitleEditInput.value = selectedTask.title;
     taskDeadlineEditInput.value = selectedTask.deadline;
 
@@ -115,9 +128,10 @@ taskList.addEventListener('click', (event) => {
 
     deleteTaskButton.addEventListener('click', () => {
       event.preventDefault();
-      tasks = tasks.filter((task) => task.id != taskIndex);
+      tasks = tasks.filter((task) => task.id != selectedTask.id);
 
       renderMainDisplay();
+      selectedTask = {};
     });
 
     editTaskForm.addEventListener('submit', (event) => {
@@ -149,6 +163,9 @@ const renderTasks = () => {
     const taskTitleElement = document.createElement('p');
     const taskDeadlineElement = document.createElement('p');
     const taskStatusElement = document.createElement('div');
+
+    taskTitleElement.id = `title-task--${task.id}`;
+    taskDeadlineElement.id = `deadline-task--${task.id}`;
 
     taskTitleElement.classList.add('task__title');
     taskDeadlineElement.classList.add('task__deadline');
