@@ -4,7 +4,7 @@ This project uses vanilla JavaScript to create a simple application to let users
 
 ## Link to the demo
 
-[https://todo-app-tramnguyenhere.netlify.app/](https://todo-app-tramnguyenhere.netlify.app/)
+[https://integrify-frontend-to-do-app.vercel.app/](https://integrify-frontend-to-do-app.vercel.app/)
 
 ## Table of content
 
