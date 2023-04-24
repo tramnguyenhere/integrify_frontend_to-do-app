@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/style.css">
+    <title>Todo App</title>
+</head>
+<body>
+    <header>Todo App</header>
+    <main class="main-display">
+       <div id="task-list__container">
+            <button id="button--add-task">ADD NEW ITEM +</button>
+            <ul id="task-list"></ul>
+            <div class="task__summary">
+                <p id="task__quantity"></p>
+                <button class="button--fit" id="button--clear-task">CLEAR TASKS</button>
+            </div>
+       </div>
+       <form id="form--add-task" class="form">
+           <label class="form__label">ADD NEW TASK</label>
+           <div class="input-list">
+               <input class="form__input" type="text" id="task__title" name="taskTitle" placeholder="Input title here...">
+               <input class="form__input" type="date" id="task__deadline" name="taskDealine">
+               <select class="form__input" id="task__status">
+                   <option value="not-started">Not Started</option>
+                   <option value="done">Done</option>
+                   <option value="in-progress">In Progress</option>
+               </select>
+           </div>
+           <div class="form__control">
+                <button class="button--fit" id="button--cancel">CANCEL</button>
+                <button class="button--fit" id="button--confirm-task">CONFIRM</button>
+           </div>
+       </form>
+       <form id="form--edit-task" class="form" style="display:none;">
+        <label class="form__label">EDIT TASK</label>
+        <div class="input-list">
+            <input class="form__input" type="text" id="task__title--edit" name="taskTitle">
+            <input class="form__input" type="date" id="task__deadline--edit" name="taskDealine">
+            <select class="form__input" id="task__status--edit">
+                <option id="task__status__option--not-started" value="not-started">Not Started</option>
+                <option id="task__status__option--done" value="done">Done</option>
+                <option id="task__status__option--in-progress" value="in-progress">In Progress</option>
+            </select>
+        </div>
+        <div class="form__control">
+            <button class="button--fit" id="button--delete-task">DELETE</button>
+            <button class="button--fit" id="button--cancel">CANCEL</button>
+            <button class="button--fit" id="button--edit-task">EDIT</button>
+        </div>
+    </form>
+    </main>
+    
+    <script src="./todo.js"></script>
+</body>
+</html>
